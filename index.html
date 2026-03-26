@@ -21,7 +21,6 @@
             padding: 16px;
         }
 
-        /* Карточка */
         .card {
             background: rgba(255, 255, 255, 0.96);
             border-radius: 48px;
@@ -30,16 +29,12 @@
             width: 100%;
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5);
             text-align: center;
-            transition: all 0.2s ease;
         }
 
         h1 {
             font-size: 32px;
             font-weight: 600;
-            background: linear-gradient(135deg, #000000, #000000);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #000000;
             margin-bottom: 8px;
         }
 
@@ -52,7 +47,6 @@
             padding-bottom: 6px;
         }
 
-        /* Поля ввода */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -84,9 +78,8 @@
             box-shadow: 0 0 0 3px rgba(139, 107, 189, 0.2);
         }
 
-        /* Кнопка */
         .send-btn {
-            background: linear-gradient(105deg, #000000, #000000);
+            background: #000000;
             border: none;
             color: white;
             font-size: 18px;
@@ -108,7 +101,6 @@
             transform: scale(0.97);
         }
 
-        /* Зона анимации (скрыта сначала) */
         .animation-area {
             display: none;
             margin-top: 20px;
@@ -127,8 +119,7 @@
             position: relative;
             width: 180px;
             height: 200px;
-            cursor: pointer;
-            animation: floatUp 3.2s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            animation: floatUp 4.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
         }
 
         .balloon-body {
@@ -229,27 +220,25 @@
     <h1>Шар памяти</h1>
     <div class="sub">лети высоко, друг</div>
 
-    <!-- Форма -->
     <div id="formBlock">
         <div class="input-group">
             <label>Имя питомца</label>
-            <input type="text">
+            <input type="text" id="petName" placeholder="Например: Барсик, Рэкси, Муся" maxlength="30">
         </div>
         <div class="input-group">
-            <label>💬 Слово или фраза</label>
-            <input type="text">
+            <label>Слово или фраза</label>
+            <input type="text" id="message" placeholder="спасибо / помню / люблю" maxlength="50">
         </div>
-        <button class="send-btn">
+        <button class="send-btn" id="sendBtn">
             Отпустить шар
         </button>
     </div>
 
-    <!-- Анимация (шары) -->
     <div id="animationBlock" class="animation-area">
         <div class="balloon-wrapper">
             <div class="balloon" id="floatingBalloon">
                 <div class="balloon-body" id="balloonBody">
-                    <div class="balloon-text" id="balloonText">Барсик<br>❤️ спасибо</div>
+                    <div class="balloon-text" id="balloonText">друг<br></div>
                 </div>
                 <div class="string"></div>
                 <div class="knot"></div>
@@ -263,10 +252,7 @@
 </div>
 
 <script>
-    // Яркие, тёплые цвета шаров
-    const colors = [
-        '#C4F898', '#98E3F8', '#A798F8', '#F898C3', '#F898A1', '#F8B698', '#F8EC98', '#98B3F8'
-    ];
+    const colors = ['#C4F898', '#98E3F8', '#A798F8', '#F898C3', '#F898A1', '#F8B698', '#F8EC98', '#98B3F8'];
 
     const sendBtn = document.getElementById('sendBtn');
     const resetBtn = document.getElementById('resetBtn');
@@ -278,49 +264,17 @@
     const balloonBody = document.getElementById('balloonBody');
     const afterMessageDiv = document.getElementById('afterMessage');
 
-    // Функция для мягких сообщений после отправки
     function getRandomMessage() {
         const messages = [
             'Лети, маленький друг...',
             'Твоя любовь в небе',
             'Память становится светом',
-            'Он/она всегда рядом',
+            'Он или она всегда рядом',
             'Ветер уносит боль, оставляя тепло'
         ];
         return messages[Math.floor(Math.random() * messages.length)];
     }
 
-    // Запуск шара
-    function launchBalloon(pet, msg) {
-        if (!pet || !msg) return false;
-
-        // Случайный цвет
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        balloonBody.style.background = `radial-gradient(circle at 30% 30%, #fff, ${randomColor})`;
-        
-        // Текст: имя и фраза
-        balloonText.innerHTML = `${escapeHtml(pet)}<br>${escapeHtml(msg)}`;
-        
-        // Меняем текст после отправки
-        afterMessageDiv.textContent = getRandomMessage();
-        
-        // Показываем анимацию, скрываем форму
-        formBlock.classList.add('hidden');
-        animationBlock.style.display = 'block';
-        
-        // Убираем класс hidden, чтобы блок появился корректно
-        setTimeout(() => {
-            animationBlock.style.opacity = '1';
-        }, 10);
-        
-        // Через 3.4 секунды анимация закончится, показываем кнопку "отправить ещё"
-        // (но сама анимация остаётся видимой до ресета)
-        setTimeout(() => {
-            afterMessageDiv.innerHTML = 'Ты не один. Твоя память осталась здесь';
-        }, 3200);
-    }
-
-    // Простая защита от XSS
     function escapeHtml(str) {
         if (!str) return '';
         return str
@@ -331,29 +285,39 @@
             .replace(/'/g, '&#39;');
     }
 
-    // Сброс — возвращаем форму, убираем шар
+    function launchBalloon(pet, msg) {
+        if (!pet || !msg) return false;
+
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        balloonBody.style.background = `radial-gradient(circle at 30% 30%, #fff, ${randomColor})`;
+        balloonText.innerHTML = `${escapeHtml(pet)}<br>${escapeHtml(msg)}`;
+        afterMessageDiv.textContent = getRandomMessage();
+
+        formBlock.classList.add('hidden');
+        animationBlock.style.display = 'block';
+
+        // Увеличил таймер до 4.7 секунд, чтобы совпадал с длительностью анимации
+        setTimeout(() => {
+            afterMessageDiv.innerHTML = 'Ты не один. Твоя память осталась здесь';
+        }, 4700);
+    }
+
     function resetToForm() {
-        // Убираем анимацию
         animationBlock.style.display = 'none';
         formBlock.classList.remove('hidden');
-        
-        // Очищаем поля
         petNameInput.value = '';
         messageInput.value = '';
-        
-        // Сбрасываем текст шара на дефолтный, чтобы при следующем запуске всё было чистым
-        balloonText.innerHTML = 'друг<br>💙';
+        balloonText.innerHTML = 'друг<br>';
         balloonBody.style.background = 'radial-gradient(circle at 30% 30%, #fff, #ffb7c5)';
         afterMessageDiv.innerHTML = 'Твой шар улетает в небо...';
     }
 
-    // Обработка отправки
     sendBtn.addEventListener('click', () => {
         const petName = petNameInput.value.trim();
         const message = messageInput.value.trim();
         
         if (!petName || !message) {
-            afterMessageDiv.innerHTML = 'Напиши имя и одно слово…';
+            afterMessageDiv.innerHTML = 'Напиши имя и одно слово';
             afterMessageDiv.style.background = '#fff0e0';
             setTimeout(() => {
                 afterMessageDiv.style.background = '#f0f7fe';
@@ -373,18 +337,12 @@
         launchBalloon(petName, message);
     });
 
-    // Кнопка "Отправить ещё один шар"
     resetBtn.addEventListener('click', () => {
         resetToForm();
     });
 
-    // Если случайно захотели отправить ещё до окончания анимации — всё равно корректно
-    // Инициализация: форма видна, анимация скрыта
     animationBlock.style.display = 'none';
     formBlock.classList.remove('hidden');
-    
-    // Красивое сообщение при загрузке
-    console.log('Шар памяти готов');
 </script>
 </body>
 </html>
