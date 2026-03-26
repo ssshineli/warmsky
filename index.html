@@ -293,6 +293,16 @@
             .replace(/'/g, '&#39;');
     }
 
+    function sendDataToBot(petName, message) {
+        if (window.Telegram && Telegram.WebApp) {
+            const data = JSON.stringify({
+                pet_name: petName,
+                message: message
+            });
+            Telegram.WebApp.sendData(data);
+        }
+    }
+
     function launchBalloon(pet, msg) {
         if (!pet || !msg) return false;
 
@@ -342,6 +352,16 @@
         }
         
         launchBalloon(petName, message);
+        
+        // Отправляем данные в бота
+        sendDataToBot(petName, message);
+        
+        // Если нужно закрыть WebApp после анимации
+        setTimeout(() => {
+            if (window.Telegram && Telegram.WebApp) {
+                Telegram.WebApp.close();
+            }
+        }, 5000);
     });
 
     resetBtn.addEventListener('click', () => {
@@ -350,6 +370,12 @@
 
     animationBlock.style.display = 'none';
     formBlock.classList.remove('hidden');
+
+    // Сообщаем Telegram, что WebApp готов
+    if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+    }
 </script>
 </body>
 </html>
