@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(145deg, #c5b697 0%, #f8db98 100%);
+            background: #F8DB98;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,27 +22,27 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 48px;
             padding: 28px 24px 36px;
             max-width: 460px;
             width: 100%;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.6);
             text-align: center;
         }
 
         h1 {
             font-size: 32px;
             font-weight: 600;
-            color: #000000;
+            color: #5C4B3A;
             margin-bottom: 8px;
         }
 
         .sub {
-            color: #000000;
+            color: #8B7355;
             font-size: 15px;
             margin-bottom: 28px;
-            border-bottom: 1px solid #000000;
+            border-bottom: 1px solid #E8D5B5;
             display: inline-block;
             padding-bottom: 6px;
         }
@@ -56,7 +56,7 @@
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: #000000;
+            color: #5C4B3A;
             margin-bottom: 6px;
             margin-left: 8px;
         }
@@ -65,7 +65,7 @@
             width: 100%;
             padding: 16px 18px;
             font-size: 16px;
-            border: 1.5px solid #000000;
+            border: 1.5px solid #E8D5B5;
             border-radius: 44px;
             background: #ffffff;
             transition: 0.2s;
@@ -74,12 +74,12 @@
         }
 
         input:focus {
-            border-color: #8b6bbd;
-            box-shadow: 0 0 0 3px rgba(139, 107, 189, 0.2);
+            border-color: #C4A27A;
+            box-shadow: 0 0 0 3px rgba(196, 162, 122, 0.2);
         }
 
         .send-btn {
-            background: #000000;
+            background: #C4A27A;
             border: none;
             color: white;
             font-size: 18px;
@@ -94,11 +94,12 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
         }
 
         .send-btn:active {
             transform: scale(0.97);
+            background: #B28C60;
         }
 
         .animation-area {
@@ -126,8 +127,8 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,240,0.95), #ff8c8c);
-            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,240,0.95), #D4B48C);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -138,7 +139,7 @@
         .balloon-text {
             color: white;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
             font-size: 18px;
             padding: 12px;
             word-break: break-word;
@@ -151,7 +152,7 @@
             left: 50%;
             width: 2.5px;
             height: 50px;
-            background: #a5673f;
+            background: #8B7355;
             transform: translateX(-50%);
         }
 
@@ -161,7 +162,7 @@
             left: 50%;
             width: 10px;
             height: 10px;
-            background: #c27e4a;
+            background: #A57C5C;
             border-radius: 2px;
             transform: translateX(-50%) rotate(45deg);
         }
@@ -183,30 +184,37 @@
         .after-message {
             margin-top: 40px;
             font-size: 14px;
-            color: #2c3e66;
-            background: #f0f7fe;
+            color: #5C4B3A;
+            background: #FFF8F0;
             padding: 12px 20px;
             border-radius: 60px;
             display: inline-block;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .reset-btn {
-            background: #eef2fa;
-            border: none;
+            background: #FFF8F0;
+            border: 1px solid #E8D5B5;
             padding: 12px 24px;
             border-radius: 40px;
             font-size: 15px;
             font-weight: 500;
             margin-top: 24px;
-            color: #4a5b7a;
+            color: #8B7355;
             cursor: pointer;
             width: auto;
+            transition: 0.2s;
+        }
+
+        .reset-btn:active {
+            transform: scale(0.97);
+            background: #F5EDE0;
         }
 
         footer {
             margin-top: 28px;
             font-size: 12px;
-            color: #8d9bb0;
+            color: #B8A07E;
         }
 
         .hidden {
@@ -223,11 +231,11 @@
     <div id="formBlock">
         <div class="input-group">
             <label>Имя питомца</label>
-            <input type="text" id="petName" placeholder="Например: Барсик, Рэкси, Муся" maxlength="30">
+            <input type="text" id="petName" maxlength="30">
         </div>
         <div class="input-group">
             <label>Слово или фраза</label>
-            <input type="text" id="message" placeholder="спасибо / помню / люблю" maxlength="50">
+            <input type="text" id="message" maxlength="50">
         </div>
         <button class="send-btn" id="sendBtn">
             Отпустить шар
@@ -252,7 +260,7 @@
 </div>
 
 <script>
-    const colors = ['#C4F898', '#98E3F8', '#A798F8', '#F898C3', '#F898A1', '#F8B698', '#F8EC98', '#98B3F8'];
+    const colors = ['#E8D5B5', '#D4B48C', '#C4A27A', '#B28C60', '#A57C5C', '#C4D4B5', '#B8C8A8'];
 
     const sendBtn = document.getElementById('sendBtn');
     const resetBtn = document.getElementById('resetBtn');
@@ -296,7 +304,6 @@
         formBlock.classList.add('hidden');
         animationBlock.style.display = 'block';
 
-        // Увеличил таймер до 4.7 секунд, чтобы совпадал с длительностью анимации
         setTimeout(() => {
             afterMessageDiv.innerHTML = 'Ты не один. Твоя память осталась здесь';
         }, 4700);
@@ -308,7 +315,7 @@
         petNameInput.value = '';
         messageInput.value = '';
         balloonText.innerHTML = 'друг<br>';
-        balloonBody.style.background = 'radial-gradient(circle at 30% 30%, #fff, #ffb7c5)';
+        balloonBody.style.background = 'radial-gradient(circle at 30% 30%, #fff, #D4B48C)';
         afterMessageDiv.innerHTML = 'Твой шар улетает в небо...';
     }
 
@@ -318,9 +325,9 @@
         
         if (!petName || !message) {
             afterMessageDiv.innerHTML = 'Напиши имя и одно слово';
-            afterMessageDiv.style.background = '#fff0e0';
+            afterMessageDiv.style.background = '#FFF0E0';
             setTimeout(() => {
-                afterMessageDiv.style.background = '#f0f7fe';
+                afterMessageDiv.style.background = '#FFF8F0';
                 afterMessageDiv.innerHTML = 'Твой шар улетает в небо...';
             }, 1800);
             return;
